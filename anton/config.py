@@ -1,7 +1,6 @@
-"""Config manager for anton
+"""Base config class for each of anton's configs
 
-This module contains the config manager for anton in `ConfigManager`.
-And various 
+This module contains the base class for each config respectivelly:
 
 preferences.json: 
     - Hide to tray (bool)
@@ -15,6 +14,11 @@ from pathlib import Path
 class Config:
     """Base class for the various configurations in anton
     
+    Attributes
+        - name(str): the specific name of the config
+        - config_folder(str): the path to the home directory config folder
+        - config_file(str): the path to the specific config json
+        
     Has features such as:
         - `load()` to load the specific config from disk
         - `save()` to save the contents of the config into disk
@@ -26,12 +30,9 @@ class Config:
         - `config_file_exists()`
     """
 
-    # Specific config name, ex: 'preferences'
     name: str
-
-    # Config Paths
     config_folder: str
-    config_file: str # Specific config file
+    config_file: str
 
     def __init__(self, name: str | None = None) -> Config:
         """Initialize Config Utility
