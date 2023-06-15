@@ -1,7 +1,31 @@
-"""
-    Base Anton GUI
-    Can be inherited to implement INGAME and OUTGAME windows
-"""
+"""Base Anton GUI
+
+Contains `Window` class that 
+can be inherited to implement INGAME and OUTGAME windows,
+represents a Tkinter.Tk Object
+
+# Example
+```py
+>> from window import Window
+
+>> # Initialize object
+>> wnd = Window()
+
+>> # Create window and show it
+>> wnd.make(topmost=True)
+
+>> # String representation of window
+>> print(wnd)
+WINDOW {
+        screen_name: 'None',
+        base_name: 'None',
+        class_name: 'TK_Window',
+        use_tk: 'True',
+        sync: 'False',
+        use: 'None',
+        visible: 'True'
+}
+```"""
 
 from tkinter import *
 from tkinter import ttk
@@ -49,7 +73,12 @@ class Window(Tk):
         return str(self)
 
     def make(self, topmost: bool = False) -> None:
-        """Create window"""
+        """
+        Creates window
+
+        Args:
+            topmost (bool): Flag to know if window is always on top
+        """
         frm = ttk.Frame(self, padding=60)
         frm.grid()
         ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
@@ -76,5 +105,10 @@ class Window(Tk):
         return self.hide()
 
     def set_atribute(self, option: str, value: Any) -> None:
-        """Set Atribute"""
+        """Set Atribute of self(Tk) object
+        
+        Args:
+            option (str): Atribute to edit.
+            value (Any): Value to edit the atribute with.
+        """
         return self.attributes(option, value)
