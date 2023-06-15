@@ -8,7 +8,7 @@ from tkinter import ttk
 from typing import Any
 
 class Window(Tk):
-    """DearPyGui Inherited GUI"""
+    """Tkinter Inherited GUI"""
 
     # Tkinter.Tk atributes https://docs.python.org/3/library/tkinter.html#tkinter.Tk
     screen_name: str | None
@@ -18,6 +18,7 @@ class Window(Tk):
     sync: bool
     use: str | None
 
+    # Window is visible flag
     visible: bool
 
     def __init__(self, screen_name: str | None = None, base_name: str | None = None, 
@@ -31,7 +32,7 @@ class Window(Tk):
         self.visible = False # Not yet created
 
         return super().__init__(screen_name, base_name, class_name, use_tk, sync, use)
-    
+
     def __str__(self) -> str:
         builder: str = "WINDOW { \n"
         builder += f"\tscreen_name: '{self.screen_name}',\n"
@@ -43,7 +44,7 @@ class Window(Tk):
         builder += f"\tvisible: '{self.visible}'\n"
         builder += "};"
         return builder
-    
+
     def __repr__(self) -> str:
         return str(self)
 
