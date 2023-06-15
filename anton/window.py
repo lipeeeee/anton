@@ -72,20 +72,13 @@ class Window(Tk):
     def __repr__(self) -> str:
         return str(self)
 
-    def make(self, topmost: bool = False) -> None:
+    def make(self) -> None:
+        """Creates window
+        
+        Raises:
+            NotImplementedError
         """
-        Creates window
-
-        Args:
-            topmost (bool): Flag to know if window is always on top
-        """
-        frm = ttk.Frame(self, padding=60)
-        frm.grid()
-        ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
-        ttk.Button(frm, text="Quit", command=self.destroy).grid(column=1, row=0)
-        self.attributes('-topmost', topmost)
-        self.visible = True
-        return self.mainloop()
+        raise NotImplementedError("window.Make is not implemented")
 
     def hide(self) -> None:
         """Hide window"""

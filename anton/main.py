@@ -4,14 +4,15 @@
 
 import sys
 from constants import EXIT_CODE_OK
-from window import Window
+from out_window import OutWindow
+import config
 import keyboard
 
 def main() -> int:
     """Anton Entry-Point"""
-    wnd = Window()
+    wnd = OutWindow()
     keyboard.on_press_key("F5", lambda _:wnd.toggle_show())
-    wnd.make(topmost=True)
+    wnd.make()
     print(wnd)
 
     return EXIT_CODE_OK
