@@ -1,5 +1,5 @@
-"""
-    Anton Package Manager
+"""Anton Package Manager
+
 """
 
 from .constants import *

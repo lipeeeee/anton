@@ -6,7 +6,7 @@ Will have outside league functionalities such as:
 3. ...
 """
 
-from tkinter import *
+from tkinter import Menu
 from window import Window
 
 class OutWindow(Window):
@@ -41,7 +41,7 @@ class OutWindow(Window):
         self.config(menu=menu)
 
         preferences = Menu(menu, tearoff=False)
-        preferences.add_command(label="Hide To Tray", command={})
+        preferences.add_command(label="Hide To Tray", command=object)
         menu.add_cascade(label='Preferences', menu=preferences)
 
         # 

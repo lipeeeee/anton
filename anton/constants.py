@@ -1,5 +1,5 @@
-"""
-    Utility Constants
+"""Utility Constants
+
 """
 
 EXIT_CODE_OK = 0

@@ -34,7 +34,7 @@ class Config:
     config_folder: str
     config_file: str
 
-    def __init__(self, name: str | None = None) -> Config:
+    def __init__(self, name: str | None = None) -> None:
         """Initialize Config Utility
         
         Raises:
@@ -48,7 +48,6 @@ class Config:
         self.name = name
         self.config_folder = str(Path.home()) + "/anton/"
         self.config_file = self.config_folder + name + ".json"
-        return self
 
     def load(self) -> bool:
         """Loads config from disk

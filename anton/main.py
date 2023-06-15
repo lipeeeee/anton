@@ -1,5 +1,5 @@
-"""
-    Entry-Point
+"""Entry-Point
+
 """
 
 import sys

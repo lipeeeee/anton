@@ -27,8 +27,7 @@ WINDOW {
 }
 ```"""
 
-from tkinter import *
-from tkinter import ttk
+from tkinter import Tk
 from typing import Any
 
 class Window(Tk):

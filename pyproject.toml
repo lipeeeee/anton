@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "anton"
+version = "0.1.0"
+description = "AIO LoL Tool"
+authors = ["lipeeeee"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+keyboard = "^0.13.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
