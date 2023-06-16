@@ -6,4 +6,5 @@ git push by pytest
 
 import pytest
 
-assert 1 == 1
+def test_fun(test):
+    assert test == 1
