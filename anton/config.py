@@ -36,7 +36,9 @@ class Config:
 
     def __init__(self, name: str | None = None) -> None:
         """Initialize Config Utility
-        
+
+        Initializes config variables and makes sure the files exist
+
         Raises:
             AssertionError if name is `None`
         
@@ -45,9 +47,13 @@ class Config:
         """
         assert name is not None
 
+        # Initialize
         self.name = name
         self.config_folder = str(Path.home()) + "/anton/"
         self.config_file = self.config_folder + name + ".json"
+
+        # Attempt to fix files
+        self.fix_files()
 
     def load(self) -> bool:
         """Loads config from disk
@@ -78,6 +84,18 @@ class Config:
             NotImplementedError
         """
         raise NotImplementedError("Config.defaults not implemented")        
+
+    def fix_files(self) -> None:
+        """Makes sure files exist for the configuration
+        
+        Checks config folder and specific config file and 
+        creates them with `defaults()` if they dont exist
+        """
+        if not self.config_folder_exists():
+            self.create_config_folder()
+            self.create_config_file()
+        elif not self.config_file_exists():
+            self.create_config_file()
 
     def config_folder_exists(self) -> bool:
         """Checks if there is an `anton/` folder in home directory
