@@ -16,6 +16,7 @@ class Preferences(Config):
         - `load()`
         - `save()`
         - `defaults()`
+        - `json_dict()`
     """
 
     # Config Attributes
@@ -24,6 +25,18 @@ class Preferences(Config):
     def __init__(self, name: str | None = "preferences") -> None:
         assert name == "preferences"
         super().__init__(name)
+
+    @property
+    def json_dict(self):
+        """Generates json dict of current configuration
+        
+        Returns:
+            json dictionary as str
+        """
+        json_dict = {
+            "hide_to_tray": self.hide_to_tray
+        }
+        return json.dumps(json_dict)
 
     def load(self) -> bool:
         """Loads config from disk
@@ -55,18 +68,16 @@ class Preferences(Config):
             file.write(self.json_dict)
 
         return True
-    
-    @property
-    def json_dict(self):
-        """Generates json dict of current configuration"""
-        json_dict = {
-            "hide_to_tray": self.hide_to_tray
-        }
-        return json.dumps(json_dict)
 
     def defaults(self) -> None:
         """Sets atributes to their default values"""
         self.hide_to_tray = False
 
-if __name__ == "__main__":
-    p = Preferences()
+    def toggle_hide_to_tray(self) -> bool:
+        """Toggles `hide_to_tray` attribute
+        
+        Returns: 
+            new value(bool) of `hide_to_tray`
+        """
+        self.hide_to_tray = not self.hide_to_tray
+        return self.hide_to_tray

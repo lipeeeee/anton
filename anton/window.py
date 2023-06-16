@@ -29,6 +29,7 @@ WINDOW {
 
 from tkinter import Tk
 from typing import Any
+from config_manager import ConfigManager
 
 class Window(Tk):
     """Tkinter Inherited GUI"""
@@ -45,7 +46,8 @@ class Window(Tk):
     visible: bool
 
     def __init__(self, screen_name: str | None = None, base_name: str | None = None, 
-                class_name: str = "TK_Window", use_tk: bool = True, sync: bool = False, use: str | None = None) -> None:
+                class_name: str = "TK_Window", use_tk: bool = True, sync: bool = False, 
+                use: str | None = None) -> None:
         self.screen_name = screen_name
         self.base_name = base_name
         self.class_name = class_name
@@ -91,7 +93,6 @@ class Window(Tk):
 
     def toggle_show(self) -> None:
         """Toggles between hid and shown"""
-        print("toggle")
         if not self.visible:
             return self.show()
         return self.hide()

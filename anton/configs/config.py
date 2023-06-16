@@ -7,6 +7,7 @@ preferences.json:
 """
 
 from __future__ import annotations
+from typing import Callable
 import os
 from pathlib import Path
 
@@ -29,6 +30,7 @@ class Config:
         - `create_config_folder()`
         - `config_file_exists()`
         - `fix_files()`
+        - `execute_and_save()`
     """
 
     name: str
@@ -157,3 +159,16 @@ class Config:
         assert self.config_file and not self.config_file_exists() and self.config_folder_exists()
         self.defaults()
         return self.save()
+    
+    def execute_and_save(self, fn: Callable) -> object:
+        """Execute function and save configuration
+        
+        Executes a given function `fn` and then executes `save()`.
+        Can be used to toggle an attribute and save contents
+
+        Returns:
+            (Unknown) Whatever `fn` returns
+        """
+        fn_res = fn()
+        self.save()
+        return fn_res
