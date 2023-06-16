@@ -6,5 +6,8 @@ git push by pytest
 
 import pytest
 
-def test_fun(test):
-    assert test == 1
+def inc(x):
+    return x + 1
+
+def test_fun():
+    assert inc(2) == 3
