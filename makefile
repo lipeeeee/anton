@@ -1,5 +1,6 @@
 #
 #	ANTON MAKEFILE
 #
+
 build:
-    python anton/main.py
+	poetry run python anton/main.py
