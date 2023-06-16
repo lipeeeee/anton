@@ -1,1 +1,2 @@
-keyboard
+keyboard = "^0.13.5"
+pytest = "^7.3.2"
