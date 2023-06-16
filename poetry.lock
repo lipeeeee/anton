@@ -12,6 +12,34 @@ files = [
 ]
 
 [[package]]
+name = "customtkinter"
+version = "5.1.3"
+description = "Create modern looking GUIs with Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "customtkinter-5.1.3-py3-none-any.whl", hash = "sha256:f0a7ce6a66c0ebcc8f1cbd257b8f7d82c45e5f49f3bcdd98223e215e33e67961"},
+    {file = "customtkinter-5.1.3.tar.gz", hash = "sha256:69a22f3ecfb6d481b566e2125acc8286f55e60c4fdc29990a4a4550250942380"},
+]
+
+[package.dependencies]
+darkdetect = "*"
+
+[[package]]
+name = "darkdetect"
+version = "0.8.0"
+description = "Detect OS Dark Mode from Python"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "darkdetect-0.8.0-py3-none-any.whl", hash = "sha256:a7509ccf517eaad92b31c214f593dbcf138ea8a43b2935406bbd565e15527a85"},
+    {file = "darkdetect-0.8.0.tar.gz", hash = "sha256:b5428e1170263eb5dea44c25dc3895edd75e6f52300986353cd63533fe7df8b1"},
+]
+
+[package.extras]
+macos-listener = ["pyobjc-framework-Cocoa"]
+
+[[package]]
 name = "iniconfig"
 version = "2.0.0"
 description = "brain-dead simple config-ini parsing"
@@ -2794,4 +2822,4 @@ testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "no
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a3b3fce4dfa9179ef882bfc043e6b0596b89d751d9e62efb511cd0cd1ec0c9ea"
+content-hash = "1f893f8176c7e02f884eabb1dd3d3ec0672efc193dff18b1a2f853c8eb4d38f8"
