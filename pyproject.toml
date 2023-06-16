@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 keyboard = "^0.13.5"
+pytest = "^7.3.2"
 
 
 [build-system]
