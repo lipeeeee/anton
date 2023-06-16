@@ -12,6 +12,7 @@ def main() -> int:
     """Anton Entry-Point"""
     wnd = OutWindow()
     a = Preferences()
+    
     keyboard.on_press_key("F5", lambda _:wnd.toggle_show())
     wnd.make()
     print(wnd)
