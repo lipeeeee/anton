@@ -28,6 +28,7 @@ class Config:
         - `config_folder_exists()`
         - `create_config_folder()`
         - `config_file_exists()`
+        - `fix_files()`
     """
 
     name: str
@@ -41,9 +42,6 @@ class Config:
 
         Raises:
             AssertionError if name is `None`
-        
-        Returns:
-            `self@Config` after initialization
         """
         assert name is not None
 
