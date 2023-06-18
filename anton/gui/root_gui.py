@@ -27,7 +27,7 @@ class RootGui(CTk):
     _set_appearence_mode = set_appearance_mode
     _set_default_color_theme = set_default_color_theme
 
-    def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
+    def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs) -> None:
         """Initializes `customtkinter` and `customtkinter.CTk` with anton's configuration
         
         Configuration changes:
@@ -40,5 +40,18 @@ class RootGui(CTk):
 
         # customtikinter.CTk initialization
         super().__init__(fg_color, **kwargs)
-        self._geometry = "400x600"
-        self.geometry(self._geometry)
+    
+    def set_geometry(self, geometry:str) -> None:
+        """Sets the Geometry of self(CTk)
+        
+        Params:
+            geometry(str): the resolution in a string format, eg: "100x200"
+        
+        Raises:
+            ValueError if geometry is None or is not string
+        """
+        if geometry is None or not isinstance(geometry, str):
+            raise ValueError("RootGui.set_geometry took an invalid argument")
+
+        self._geometry = geometry
+        self.geometry(geometry)
