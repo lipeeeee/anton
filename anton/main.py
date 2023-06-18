@@ -6,18 +6,17 @@ Initializes Configs
 
 import sys
 from constants import EXIT_CODE_OK
-from out_window import OutWindow
+from gui.root_gui import RootGui
+from gui.out_frame import OutFrame
 from config_manager import ConfigManager
 import keyboard
 
 def main() -> int:
     """Anton Entry-Point"""
-    wnd = OutWindow()
-    
-    keyboard.on_press_key("F5", lambda _:wnd.toggle_show())
-    wnd.make()
-    print(wnd)
-
+    gui = RootGui()
+    out_frame = OutFrame(gui)
+    out_frame.make()
+    gui.mainloop()
     return EXIT_CODE_OK
 
 if __name__ == "__main__":

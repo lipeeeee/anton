@@ -1,10 +1,9 @@
 """Anton Library
 
 Includes:
-- Windows classes
-    - Window(base class)
-    - OutWindow
-    - InWindow
+- Gui Classes
+    - RootGui
+    - OutFrame
 
 - Config Classes
     - ConfigManager
@@ -14,9 +13,9 @@ Includes:
 from .constants import EXIT_CODE_OK, EXIT_CODE_BAD
 from .main import main 
 
-# Windows
-from .window import Window
-from .out_window import OutWindow
+# Gui's
+from gui.root_gui import RootGui
+from gui.out_frame import OutFrame
 
 # Configs
 from .config_manager import ConfigManager
