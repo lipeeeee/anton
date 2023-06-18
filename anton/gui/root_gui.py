@@ -40,7 +40,20 @@ class RootGui(CTk):
 
         # customtikinter.CTk initialization
         super().__init__(fg_color, **kwargs)
-    
+
+    def __str__(self) -> str:
+        builder: str = "RootGui(" + str(id(self)) + ") {\n"
+        builder += f"\tappearance_mode: '{self._get_appearance_mode()}',\n"
+        builder += f"\twindow_scaling: '{str(self._get_window_scaling())}',\n"
+        builder += f"\ttitle: '{self.title()}',\n"
+        builder += f"\tstate: '{self.state()}',\n"
+        builder += f"\tsize: '{str(self.size())}',\n"
+        builder += "};"
+        return builder
+
+    def __repr__(self) -> str:
+        return f"<RootGui {str(id(self))}>"
+
     def set_geometry(self, geometry:str) -> None:
         """Sets the Geometry of self(CTk)
         
