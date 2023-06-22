@@ -26,7 +26,7 @@ class OutFrame(CTkFrame):
 
         self.pack()
 
-    def make(self) -> None:
+    def make(self) -> None:        
         """Makes the GUI of Outside league window"""
         label1 = CTkLabel(master=self, text="Test")
         label1.pack()

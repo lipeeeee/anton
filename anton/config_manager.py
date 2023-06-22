@@ -20,7 +20,7 @@ class ConfigManager():
     ```
 
     Raises:
-        TypeError if trying to initialize it
+        TypeError: if trying to initialize it
     """
 
     # Configs

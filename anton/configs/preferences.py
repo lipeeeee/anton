@@ -27,11 +27,11 @@ class Preferences(Config):
         super().__init__(name)
 
     @property
-    def json_dict(self):
+    def json_dict(self):        
         """Generates json dict of current configuration
         
         Returns:
-            json dictionary as str
+            str: json dictionary as str
         """
         json_dict = {
             "hide_to_tray": self.hide_to_tray
@@ -45,7 +45,7 @@ class Preferences(Config):
         and gets each attribute from it
 
         Returns:
-            flag(bool) to know if config was sucessefuly loaded
+            bool: to know if config was sucessefuly loaded
         """
         with open(self.config_file, "r") as file:
             # Get json obj
@@ -62,7 +62,7 @@ class Preferences(Config):
         Dumps `self.json_dict` into a folder
 
         Returns:
-            flag(bool) to know if config was sucessefuly saved
+            bool: to know if config was sucessefuly saved
         """
         with open(self.config_file, "w") as file:
             file.write(self.json_dict)
@@ -77,7 +77,7 @@ class Preferences(Config):
         """Toggles `hide_to_tray` attribute
         
         Returns: 
-            new value(bool) of `hide_to_tray`
+            bool: new value of `hide_to_tray`
         """
         self.hide_to_tray = not self.hide_to_tray
         return self.hide_to_tray

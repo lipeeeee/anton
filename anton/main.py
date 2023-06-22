@@ -1,7 +1,6 @@
 """Entry-Point
 
 Initializes Configs
-
 """
 
 import sys

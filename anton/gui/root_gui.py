@@ -18,7 +18,7 @@ class RootGui(CTk):
     league frames.
 
     Attributes:
-        _geometry(str): the resolution of the window in a str format, eg: "100x100"
+        _geometry (str): the resolution of the window in a str format, eg: "100x100"
     """
 
     _geometry: str 
@@ -54,14 +54,14 @@ class RootGui(CTk):
     def __repr__(self) -> str:
         return f"<RootGui {str(id(self))}>"
 
-    def set_geometry(self, geometry:str) -> None:
+    def set_geometry(self, geometry:str) -> None:                
         """Sets the Geometry of self(CTk)
         
         Params:
-            geometry(str): the resolution in a string format, eg: "100x200"
+            geometry (str): the resolution in a string format, eg: "100x200"
         
         Raises:
-            ValueError if geometry is None or is not string
+            ValueError: if geometry is None or is not string
         """
         if geometry is None or not isinstance(geometry, str):
             raise ValueError("RootGui.set_geometry took an invalid argument")

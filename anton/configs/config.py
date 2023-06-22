@@ -45,7 +45,7 @@ class Config:
         Loads after everything is done
 
         Raises:
-            AssertionError if name is `None`
+            AssertionError: if name is `None`
         """
         assert name is not None
 
@@ -69,7 +69,7 @@ class Config:
         """
         raise NotImplementedError("Config.json_dict not implemented")
     
-    def load(self) -> bool:
+    def load(self) -> bool:        
         """Loads config from disk
         
         Gets the json object from the conf file
@@ -79,7 +79,7 @@ class Config:
             NotImplementedError
 
         Returns:
-            flag(bool) to know if config was sucessefuly loaded
+            bool: to know if config was sucessefuly loaded
         """
         raise NotImplementedError("Config.load not implemented")
     
@@ -92,7 +92,7 @@ class Config:
             NotImplementedError
 
         Returns:
-            flag(bool) to know if config was sucessefuly saved
+            bool: to know if config was sucessefuly saved
         """
         raise NotImplementedError("Config.save not implemented")
     
@@ -120,7 +120,7 @@ class Config:
         """Checks if there is an `anton/` folder in home directory
         
         Returns:
-            flag(bool) of if there was a config folder before creation
+            bool: of if there was a config folder before creation
         """
         config_exists = os.path.exists(self.config_folder)
 
@@ -130,7 +130,7 @@ class Config:
         """Creates config folder in home directory
 
         Raises:
-            AssertionError if couldnt retrieve `config_folder` path 
+            AssertionError: if couldnt retrieve `config_folder` path 
             or folder already exists
         """
         assert self.config_folder and not self.config_folder_exists()
@@ -140,7 +140,7 @@ class Config:
         """Checks if the configuration file is present on disk
         
         Returns:
-            flag(bool) of if the config file exists or not(bool)
+            bool: of if the config file exists or not(bool)
         """
         return os.path.exists(self.config_file)
     
@@ -154,7 +154,7 @@ class Config:
             or file already exists or config folder doesnt exist
         
         Returns:
-            flag(bool) if everything was done well
+            bool: if everything was done well
         """
         assert self.config_file and not self.config_file_exists() and self.config_folder_exists()
         self.defaults()
@@ -167,7 +167,7 @@ class Config:
         Can be used to toggle an attribute and save contents
 
         Returns:
-            (Unknown) Whatever `fn` returns
+            (Unknown): Whatever `fn` returns
         """
         fn_res = fn()
         self.save()
