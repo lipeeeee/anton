@@ -61,7 +61,7 @@ class Config:
         self.load()
 
     @property
-    def json_dict(self):
+    def json_dict(self) -> str:
         """Generates json dict of current configuration
         
         Raises:
