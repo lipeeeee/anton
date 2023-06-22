@@ -16,7 +16,7 @@ class OutFrame(CTkFrame):
     GUI of outside league anton window, it uses `customtkinter.CtkFrame`
 
     It is supposed to be used with root_gui's Ctk Implementation as it's master,
-    but it can, theoritcally be used with any Ctk Class
+    but it can, theoretically, be used with any Ctk Class
     """
 
     master: CTk
@@ -36,10 +36,30 @@ class OutFrame(CTkFrame):
         """Makes the GUI of Outside league window"""
         
         # Navbar
+        navbar = self.make_navbar()
+        self.master.config(menu=navbar)
+
+        label1 = CTkLabel(master=self, text="Test")
+        label1.pack()
+    
+    def make_navbar(self) -> Menu:
+        """Helper function that makes a tkinter.Menu Navbar
+        
+        Makes a menu/Navbar containing:
+        - Preferences
+        - ...
+        
+        Returns:
+            tkinter.Menu: Representing the outside league window 
+            navbar for anton
+        """
+        
+        # Initialize all menus
         menu = Menu(master=self)
-        self.master.config(menu=menu)
+        preferences = Menu(menu, tearoff=False)
         
         # Preferences
+        # Preferences.Hide to tray
         def hide_to_tray_save() -> bool:
             """Helper function to toggle `hide_to_tray` and save config
             
@@ -47,18 +67,80 @@ class OutFrame(CTkFrame):
                 bool: flag of sucesseful save
             """
             ConfigManager.preferences.toggle_hide_to_tray()
-            hide_to_tray_from_config.get()
+            self.set_hide_to_tray(hide_to_tray_from_config.get())
             return ConfigManager.preferences.save()
         
-        preferences = Menu(menu, tearoff=False)
+        # Get values from config
         hide_to_tray_value = ConfigManager.preferences.hide_to_tray
-        hide_to_tray_from_config = Variable(menu, int(ConfigManager.preferences.hide_to_tray))
+        hide_to_tray_from_config = Variable(menu, ConfigManager.preferences.hide_to_tray)
         hide_to_tray_from_config.set(hide_to_tray_value)
+        self.set_hide_to_tray(hide_to_tray_value)
         preferences.add_checkbutton(label='Hide To Tray', command=hide_to_tray_save, variable=hide_to_tray_from_config)
-        menu.add_cascade(label='Preferences', menu=preferences)        
-           
-        label1 = CTkLabel(master=self, text="Test")
-        label1.pack()
+        
+        # Preferences.Always top
+        def always_top_save() -> bool:
+            """Helper function to toggle `always_top` and save config
+            
+            Returns:
+                bool: flag of sucesseful save
+            """
+            ConfigManager.preferences.toggle_always_top()
+            self.set_always_top(always_top_from_config.get())
+            return ConfigManager.preferences.save()
+  
+        # Get values from config
+        always_top_value = ConfigManager.preferences.always_top
+        always_top_from_config = Variable(menu, ConfigManager.preferences.always_top)
+        always_top_from_config.set(always_top_value)
+        self.set_always_top(always_top_value)
+        preferences.add_checkbutton(label='Always on Top', command=always_top_save, variable=always_top_from_config)
+        
+        # Finish Preferences
+        menu.add_cascade(label='Preferences', menu=preferences)
+
+        return menu
+    
+    def set_hide_to_tray(self, flag: bool) -> None:
+        """Sets the option to always hide to tray
+        
+        Assumes that `flag` is an object representing a boolean,
+        doesnt care if it is:
+        - "1"(str)
+        - 1(int)
+        - True(bool)
+        
+        Params:
+            flag (bool): to know if we hide to tray or not
+        """
+        if isinstance(flag, int):
+            flag = bool(flag)
+        elif isinstance(flag, str):
+            flag = bool(int(flag))
+        
+        if flag is True:
+            self.master.protocol("WM_DELETE_WINDOW", self.master.iconify)
+        else:
+            self.master.protocol("WM_DELETE_WINDOW", self.master.destroy)
+    
+    def set_always_top(self, flag: bool) -> None:
+        """Sets the option to always stay on top
+        
+        Assumes that `flag` is an object representing a boolean,
+        doesnt care if it is:
+        - "1"(str)
+        - 1(int)
+        - True(bool)
+        
+        Params:
+            flag (bool): to know if we stay on top or not
+        """
+        if isinstance(flag, int):
+            flag = bool(flag)
+        elif isinstance(flag, str):
+            flag = bool(int(flag))
+
+        self.master.attributes('-topmost', flag)    
+        self.master.update()
     
     def set_geometry(self, geometry:str) -> None:
         """Sets geometry of the window
