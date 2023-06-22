@@ -1,5 +1,18 @@
+<div align="center">
+	
 # anton
-AIO LoL tool
+	
+</div>
+Anton is a league of legends hack focused around QOL(Quality of life) improvements.
+
+# League Client Hook
+...
+
+# Remove Challenges
+...
+
+# Start as Offline
+...
 
 # PS
 CTK DOES NOT ALLOW `HIDE_TO_TRAY` SO WE ALWAYS HIDE TO TASKBAR
