@@ -5,7 +5,7 @@ anton GUI using customtkinter and `root_gui.py`'s RootGui
 """
 
 from typing import Optional, Tuple, Union, Any
-from customtkinter import CTkFrame, CTkLabel, CTk, CTkOptionMenu
+from customtkinter import CTkFrame, CTkLabel, CTk, CTkButton, CTkFont
 from tkinter import Menu, Variable
 from config_manager import ConfigManager
 
@@ -20,15 +20,25 @@ class OutFrame(CTkFrame):
     """
 
     master: CTk
+    width: int
+    height: int
+    
+    # Widgets / Controls
+    navbar: Menu
+    button_challenges: CTkButton
 
     def __init__(self, master: CTk, width: int = 200, height: int = 200, corner_radius: int | str | None = None, border_width: int | str | None = None, bg_color: str | Tuple[str, str] = "transparent", fg_color: str | Tuple[str, str] | None = None, border_color: str | Tuple[str, str] | None = None, background_corner_colors: Tuple[str | Tuple[str, str]] | None = None, overwrite_preferred_drawing_method: str | None = None, **kwargs):
         """Initialize Outside League Frame"""
         super().__init__(master, width, height, corner_radius, border_width, bg_color, fg_color, border_color, background_corner_colors, overwrite_preferred_drawing_method, **kwargs)
 
         self.master = master
-
-        master.title("Outside Anton")
+        self.master.title("Outside Anton")
         self.set_geometry("400x600")
+        self.master.state('zoomed') # Starts in top-left of main screen
+
+        # Ui Grids
+        self.master.grid_rowconfigure(5, weight=1)
+        self.master.grid_columnconfigure(1, weight=1)
 
         self.pack()
 
@@ -36,12 +46,25 @@ class OutFrame(CTkFrame):
         """Makes the GUI of Outside league window"""
         
         # Navbar
-        navbar = self.make_navbar()
-        self.master.config(menu=navbar)
+        self.navbar = self.make_navbar()
+        self.master.config(menu=self.navbar)
 
-        label1 = CTkLabel(master=self, text="Test")
-        label1.pack()
-    
+        button_font = CTkFont('Arial', 24, weight="bold")
+
+        # Reset Challenges button
+        self.button_challenges = CTkButton(master=self, text='Reset Challenges',
+                                           width=self.width - 10, height=50, font=button_font)
+        self.button_challenges.grid(row=0, column=0, pady=5)
+
+        # Start league offline
+        self.button_start_offline = CTkButton(master=self, text='Start LoL Offline',
+                                             width=self.width - 10, height=50, font=button_font)        
+        self.button_start_offline.grid(row=1, column=0, pady=5)
+        
+        # me:)
+        self.me_label = CTkLabel(master=self, text="me:)lipeeeee")
+        self.me_label.grid(row=4, column=0, pady=300)
+        
     def make_navbar(self) -> Menu:
         """Helper function that makes a tkinter.Menu Navbar
         
@@ -57,7 +80,7 @@ class OutFrame(CTkFrame):
         # Initialize all menus
         menu = Menu(master=self)
         preferences = Menu(menu, tearoff=False)
-        
+
         # Preferences
         # Preferences.Hide to tray
         def hide_to_tray_save() -> bool:
@@ -157,6 +180,6 @@ class OutFrame(CTkFrame):
         
         self.master.geometry(geometry)
 
-        width, height = (int(x) for x in geometry.split("x"))
-        self.master.maxsize(width, height)
-        self.master.minsize(width, height)
+        self.width, self.height = (int(x) for x in geometry.split("x"))
+        self.master.maxsize(self.width, self.height)
+        self.master.minsize(self.width, self.height)

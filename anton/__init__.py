@@ -13,6 +13,10 @@ Includes:
 from .constants import EXIT_CODE_OK, EXIT_CODE_BAD
 from .main import main 
 
+# Anton & League
+from .anton import Anton
+from league_client import LeagueClient
+
 # Gui's
 from gui.root_gui import RootGui
 from gui.out_frame import OutFrame

@@ -35,7 +35,7 @@ class RootGui(CTk):
             `default_color_theme`: Color Theme
         """
         # customtkinter initialization
-        set_appearance_mode('dark')
+        set_appearance_mode('system')
         set_default_color_theme('dark-blue')
 
         # customtikinter.CTk initialization
