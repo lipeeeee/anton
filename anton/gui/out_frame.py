@@ -17,6 +17,13 @@ class OutFrame(CTkFrame):
 
     It is supposed to be used with root_gui's Ctk Implementation as it's master,
     but it can, theoretically, be used with any Ctk Class
+    
+    Attributes:
+        master (CTk): parent of self(CTkFrame), usually a RootGui instance
+        width (int): width of frame
+        height (int): height of frame
+        navbar (Menu): the navbar in outframe
+        button_challenges (CTkButton): Button for the challenges reset  
     """
 
     master: CTk

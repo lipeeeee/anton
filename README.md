@@ -14,6 +14,12 @@ Anton is a league of legends hack focused around QOL(Quality of life) improvemen
 # Start as Offline
 ...
 
+
+# HACKING LEAGUE Client
+```bash
+WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline
+```
+
 # BUILDING .EXE
 
 WHITHOUT CUSOTOM FONT JSON(USING ONE THAT CUSTOMTKINTER ALREADY PROVIDES)

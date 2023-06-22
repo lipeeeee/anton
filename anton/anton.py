@@ -2,7 +2,7 @@
 
 """
 
-from .league_client import LeagueClient
+from .league_connection import LeagueConnection
 
 class Anton:
     """Main Anton class
@@ -11,11 +11,11 @@ class Anton:
     improvements
     """
 
-    league_client: LeagueClient
+    league_client: LeagueConnection
 
     def __init__(self) -> None:
         """."""
-        self.league_client = LeagueClient()
+        self.league_client = LeagueConnection()
 
     def remove_challenges(self) -> None:
         """Remove League Challenges

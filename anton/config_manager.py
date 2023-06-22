@@ -8,7 +8,7 @@ from .configs.preferences import Preferences
 class ConfigManager():
     """**STATIC** Config Manager for anton
     
-    Has all anton configs such as:
+    Attributes:
         Preferences(Config)
 
     Usage: 

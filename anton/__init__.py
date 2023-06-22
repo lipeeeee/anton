@@ -14,7 +14,7 @@ from .constants import EXIT_CODE_OK, EXIT_CODE_BAD
 
 # Anton & League
 from .anton import Anton
-from .league_client import LeagueClient
+from .league_connection import LeagueConnection
 
 # Gui's
 from .gui.root_gui import RootGui

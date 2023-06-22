@@ -9,7 +9,7 @@ import json
 class Preferences(Config):
     """Specific `preferences` config based on ``Anton.Config``
 
-    Config Attributes:
+    Attributes:
         hide_to_tray (bool): Flag to know if minimizes to tray
         always_top (bool): Flag to know if the window stays always on top
 
