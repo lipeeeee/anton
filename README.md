@@ -14,6 +14,13 @@ Anton is a league of legends hack focused around QOL(Quality of life) improvemen
 # Start as Offline
 ...
 
+# BUILDING .EXE
+
+WHITHOUT CUSOTOM FONT JSON(USING ONE THAT CUSTOMTKINTER ALREADY PROVIDES)
+```bash
+pyinstaller.exe -F main.py --collect-all customtkinter
+```
+
 # PS
 CTK DOES NOT ALLOW `HIDE_TO_TRAY` SO WE ALWAYS HIDE TO TASKBAR
 

@@ -7,7 +7,7 @@ anton GUI using customtkinter and `root_gui.py`'s RootGui
 from typing import Optional, Tuple, Union, Any
 from customtkinter import CTkFrame, CTkLabel, CTk, CTkButton, CTkFont
 from tkinter import Menu, Variable
-from config_manager import ConfigManager
+from ..config_manager import ConfigManager
 
 class OutFrame(CTkFrame):
     """Outside League Anton Window
@@ -64,7 +64,7 @@ class OutFrame(CTkFrame):
 
         # Start league offline
         self.button_start_offline = CTkButton(master=self, text='Start LoL Offline',
-                                             width=self.width - 10, height=50, font=button_font)        
+                                             width=self.width - 10, height=50, font=button_font)
         self.button_start_offline.grid(row=1, column=0, pady=5)
         
         # me:)

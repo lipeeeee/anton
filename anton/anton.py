@@ -2,7 +2,7 @@
 
 """
 
-from league_client import LeagueClient
+from .league_client import LeagueClient
 
 class Anton:
     """Main Anton class

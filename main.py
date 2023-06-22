@@ -4,10 +4,10 @@ Initializes Configs
 """
 
 import sys
-from constants import EXIT_CODE_OK
-from gui.root_gui import RootGui
-from gui.out_frame import OutFrame
-from config_manager import ConfigManager
+from anton.constants import EXIT_CODE_OK
+from anton.gui.root_gui import RootGui
+from anton.gui.out_frame import OutFrame
+from anton.config_manager import ConfigManager
 import keyboard
 
 def main() -> int:

@@ -3,7 +3,7 @@
 Encompasses every config used in anton
 """
 
-from configs.preferences import Preferences
+from .configs.preferences import Preferences
 
 class ConfigManager():
     """**STATIC** Config Manager for anton
