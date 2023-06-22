@@ -10,7 +10,8 @@ class Preferences(Config):
     """Specific `preferences` config based on ``Anton.Config``
     
     Config Attributes:
-        hide_to_tray(bool) - Flag to know if minimizes to tray
+        hide_to_tray (bool): Flag to know if minimizes to tray
+        always_top (bool): Flag to know if the window stays always on top
 
     Implements from base class:
         - `load()`
@@ -21,6 +22,7 @@ class Preferences(Config):
 
     # Config Attributes
     hide_to_tray: bool
+    always_top: bool
 
     def __init__(self, name: str | None = "preferences") -> None:
         assert name == "preferences"
@@ -34,7 +36,8 @@ class Preferences(Config):
             str: json dictionary as str
         """
         json_dict = {
-            "hide_to_tray": self.hide_to_tray
+            "hide_to_tray": self.hide_to_tray,
+            "always_top": self.always_top
         }
         return json.dumps(json_dict)
 
@@ -53,6 +56,7 @@ class Preferences(Config):
 
             # Get Attributes
             self.hide_to_tray = json_obj["hide_to_tray"]
+            self.always_top = json_obj["always_top"]
 
         return True
     
@@ -72,6 +76,7 @@ class Preferences(Config):
     def defaults(self) -> None:
         """Sets atributes to their default values"""
         self.hide_to_tray = False
+        self.always_top = False
 
     def toggle_hide_to_tray(self) -> bool:
         """Toggles `hide_to_tray` attribute
@@ -81,3 +86,12 @@ class Preferences(Config):
         """
         self.hide_to_tray = not self.hide_to_tray
         return self.hide_to_tray
+    
+    def toggle_always_top(self) -> bool:
+        """Toggles `always_top` attribute
+        
+        Returns:
+            bool: new value of `always_top`
+        """
+        self.always_top = not self.always_top
+        return self.always_top
