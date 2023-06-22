@@ -1,4 +1,4 @@
-"""Preferences Specific Config 
+"""Preferences Specific Config
 
 Stores the preferences config loading, saving and default logics
 """
@@ -8,7 +8,7 @@ import json
 
 class Preferences(Config):
     """Specific `preferences` config based on ``Anton.Config``
-    
+
     Config Attributes:
         hide_to_tray (bool): Flag to know if minimizes to tray
         always_top (bool): Flag to know if the window stays always on top
@@ -29,9 +29,9 @@ class Preferences(Config):
         super().__init__(name)
 
     @property
-    def json_dict(self):        
+    def json_dict(self) -> str:
         """Generates json dict of current configuration
-        
+
         Returns:
             str: json dictionary as str
         """
@@ -43,8 +43,8 @@ class Preferences(Config):
 
     def load(self) -> bool:
         """Loads config from disk
-        
-        Gets the json object from t he conf file
+
+        Gets the json object from the conf file
         and gets each attribute from it
 
         Returns:
@@ -59,7 +59,7 @@ class Preferences(Config):
             self.always_top = json_obj["always_top"]
 
         return True
-    
+
     def save(self) -> bool:
         """Saves config to disk
 
@@ -80,16 +80,16 @@ class Preferences(Config):
 
     def toggle_hide_to_tray(self) -> bool:
         """Toggles `hide_to_tray` attribute
-        
+
         Returns: 
             bool: new value of `hide_to_tray`
         """
         self.hide_to_tray = not self.hide_to_tray
         return self.hide_to_tray
-    
+
     def toggle_always_top(self) -> bool:
         """Toggles `always_top` attribute
-        
+
         Returns:
             bool: new value of `always_top`
         """

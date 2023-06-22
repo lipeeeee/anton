@@ -28,6 +28,6 @@ class ConfigManager():
 
     def __init__(self) -> None:
         raise TypeError("Cannot Initialize Config Manager because it is a static class")
-    
+
     def __new__(cls) -> None:
         raise TypeError("Cannot Initialize Config Manager because it is a static class")
