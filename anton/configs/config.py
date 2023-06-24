@@ -11,6 +11,7 @@ from typing import Callable
 import os
 from pathlib import Path
 
+
 class Config:
     """Base class for the various configurations in anton
 
@@ -68,7 +69,7 @@ class Config:
             NotImplementedError
         """
         raise NotImplementedError("Config.json_dict not implemented")
-    
+
     def load(self) -> bool:
         """Loads config from disk
 
@@ -156,7 +157,11 @@ class Config:
         Returns:
             bool: if everything was done well
         """
-        assert self.config_file and not self.config_file_exists() and self.config_folder_exists()
+        assert (
+            self.config_file
+            and not self.config_file_exists()
+            and self.config_folder_exists()
+        )
         self.defaults()
         return self.save()
 

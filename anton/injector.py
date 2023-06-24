@@ -2,12 +2,15 @@
 
 """
 
+
 def xdd():
     import sys
     import ctypes.util
 
     # Resolving python.dll path in order to inject it in the target process
-    python_library = 'python{}{}.dll'.format(sys.version_info.major, sys.version_info.minor)
+    python_library = "python{}{}.dll".format(
+        sys.version_info.major, sys.version_info.minor
+    )
     python_library = ctypes.util.find_library(python_library)
 
     """from mayhem import utilities

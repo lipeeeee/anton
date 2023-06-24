@@ -1,13 +1,4 @@
-"""Anton Library
-
-Includes:
-- Gui Classes
-    - RootGui
-    - OutFrame
-
-- Config Classes
-    - ConfigManager
-    - Preferences
+"""Anton Package
 """
 
 from .constants import EXIT_CODE_OK, EXIT_CODE_BAD
@@ -15,6 +6,10 @@ from .constants import EXIT_CODE_OK, EXIT_CODE_BAD
 # Anton & League
 from .anton import Anton
 from .league_connection import LeagueConnection
+
+# Utils and other useful Classes
+from .background_thread import BackgroundThread
+from .windows_utils import execute_cmd_command
 
 # Gui's
 from .gui.root_gui import RootGui

@@ -4,6 +4,7 @@
 
 from .league_connection import LeagueConnection
 
+
 class Anton:
     """Main Anton class
 

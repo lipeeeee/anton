@@ -5,13 +5,14 @@ Encompasses every config used in anton
 
 from .configs.preferences import Preferences
 
-class ConfigManager():
+
+class ConfigManager:
     """**STATIC** Config Manager for anton
-    
+
     Attributes:
         Preferences(Config)
 
-    Usage: 
+    Usage:
     ```py
     >> from config_manager import ConfigManager
 
