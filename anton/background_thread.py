@@ -2,8 +2,6 @@
 
 Made to run a certain function continuously between a 
 set period of time
-
-TODO: stop flag
 """
 
 from time import sleep
@@ -22,10 +20,13 @@ class BackgroundThread(Thread):
 
         time_between_runs (int): Time in seconds of how often the
         `fn_to_run` should be ran
+
+        running (bool): Flag of if the thread is being ran
     """
 
     fn_to_run: Callable
     time_between_runs: int
+    running: bool
 
     def __init__(
         self,
@@ -42,8 +43,19 @@ class BackgroundThread(Thread):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.fn_to_run = fn_to_run
         self.time_between_runs = time_between_runs
+        self.running = False
+
+    def start(self) -> None:
+        """Start running thread"""
+        self.running = True
+        return super().start()
 
     def run(self) -> None:
-        while True:
+        """Main thread execution"""
+        while self.running:
             self.fn_to_run()
             sleep(self.time_between_runs)
+
+    def stop(self) -> None:
+        """Signal thread to stop executing"""
+        self.running = False

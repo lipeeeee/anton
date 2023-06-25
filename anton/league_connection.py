@@ -49,15 +49,15 @@ class LeagueConnection:
     Example request:
         GET https://127.0.0.1:2999/liveclientdata/allgamedata
     Example of no connection to `LCA`:
-        "No Instance(s) Available."
+        "No Instance(s) Available"
     """
 
     cmd_output_dict: DefaultDict
     base_url: str
     protocol: str
     username: str
-    # _port: str  # moved to @proprety
-    # _remoting_auth_token: str @ proprety
+    # port: str  # moved to @proprety
+    # remoting_auth_token: str @ proprety
     connected: bool
     listener: BackgroundThread
 
@@ -91,9 +91,12 @@ class LeagueConnection:
         return self.cmd_output_dict["remoting-auth-token"]
 
     def listen(self) -> None:
-        """Pseudo-Hook to listen to the status of `LCA`
+        """Listens to the status of `LCA`
 
-        Function that runs every X seconds to get the status of `LCA`'s LeagueConnection
+        Loads content of `LCA` into:
+            self.cmd_output_dict (defaultdict): the contents
+
+            self.connected (bool): the status of connection
         """
         print("Listening to `LCA`...")
 
@@ -110,6 +113,9 @@ class LeagueConnection:
 
         Removes '\n' and excessive spaces from the output
         of `CMD_HACK`
+
+        WARNING:
+            The execution of this function can most likely be removed
         """
         output = remove_excessive_spaces(output)
         output = re.sub("\n", "", output)
