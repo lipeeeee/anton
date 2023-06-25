@@ -3,4 +3,4 @@
 #
 
 build:
-	poetry run python anton/main.py
+	poetry run python main.py

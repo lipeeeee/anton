@@ -4,8 +4,10 @@
 
 from collections import defaultdict
 import re
-from background_thread import BackgroundThread
-from windows_utils import execute_cmd_command, remove_excessive_spaces
+import requests
+from requests.models import Response
+from .background_thread import BackgroundThread
+from .windows_utils import execute_cmd_command, remove_excessive_spaces
 from typing import DefaultDict
 
 
@@ -76,7 +78,7 @@ class LeagueConnection:
 
         # Start LCA Listener
         self.listener = BackgroundThread(
-            fn_to_run=self.listen, time_between_runs=self.LISTEN_TIMEOUT
+            fn_to_run=self.listen, time_between_runs=self.LISTEN_TIMEOUT, daemon=True
         )
         self.listener.start()
 
@@ -89,6 +91,11 @@ class LeagueConnection:
     def remoting_auth_token(self):
         """Riot auth key"""
         return self.cmd_output_dict["remoting-auth-token"]
+
+    @property
+    def auth(self):
+        """Auth tuple (username, remoting_auth_token)"""
+        return (self.username, self.remoting_auth_token)
 
     def listen(self) -> None:
         """Listens to the status of `LCA`
@@ -137,20 +144,31 @@ class LeagueConnection:
 
         return variables
 
-    def build_url(self, request: str) -> str:
+    def build_url(self, path: str) -> str:
         """Build request url
 
         Helper function that builds a complete url of a request
         """
-        return f"{self.protocol}://{self.base_url}:{self.port}/{request}"
+        return f"{self.protocol}://{self.base_url}:{self.port}/{path}"
 
-    def get(self, url) -> object:
-        """."""
+    def get(self, path: str) -> Response | None:
+        """Get request"""
+        if not self.connected:
+            return None
 
-    def post(self, url, key) -> object:
-        """."""
+        return requests.get(self.build_url(path), auth=self.auth)
+
+    def post(
+        self, path: str, data: dict | None = None, json: dict | None = None
+    ) -> Response | None:
+        """Post into LCA"""
+        if not self.connected:
+            return None
+
+        return requests.post(
+            self.build_url(path), data=data, json=json, auth=self.auth, verify=False
+        )
 
 
 if __name__ == "__main__":
     lc = LeagueConnection()
-    print("AFTER")

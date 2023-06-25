@@ -24,4 +24,10 @@ class Anton:
         Remove League of Legends challenges from profile
         using RIOT's `League Client API`
         """
-        return
+        response = self.league_client.post(
+            path="lol-challenges/v1/update-player-preferences/",
+            json={"challengeIds": []},
+        )
+
+        if response is None or response.status_code != 204:
+            print("SOMETHING WENT WRONG")

@@ -22,7 +22,8 @@ def xdd():
     python_library_local  = kernel32.GetModuleHandleW(python_library)
 
     initializer = python_library_remote + (
-            kernel32.GetProcAddress(python_library_local, b'Py_InitializeEx') - python_library_local)
+            kernel32.GetProcAddress(python_library_local, b'Py_InitializeEx') 
+            - python_library_local)
 
     # Calling Py_InitializeEx(0) in the remote process
     process.join_thread(process.start_thread(initializer, 0))
