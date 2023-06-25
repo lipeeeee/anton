@@ -27,11 +27,6 @@ class BackgroundThread(Thread):
     fn_to_run: Callable
     time_between_runs: int
 
-    def run(self) -> None:
-        while True:
-            self.fn_to_run()
-            sleep(self.time_between_runs)
-
     def __init__(
         self,
         fn_to_run: Callable,
@@ -47,3 +42,8 @@ class BackgroundThread(Thread):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.fn_to_run = fn_to_run
         self.time_between_runs = time_between_runs
+
+    def run(self) -> None:
+        while True:
+            self.fn_to_run()
+            sleep(self.time_between_runs)

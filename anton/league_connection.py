@@ -2,9 +2,11 @@
 
 """
 
-import asyncio
+from collections import defaultdict
+import re
 from background_thread import BackgroundThread
-from windows_utils import execute_cmd_command
+from windows_utils import execute_cmd_command, remove_excessive_spaces
+from typing import DefaultDict
 
 
 class LeagueConnection:
@@ -13,19 +15,24 @@ class LeagueConnection:
     Provides riot-access to every `LCA` http/https request
 
     Attributes:
+        cmd_output_dict (Dict): A Dictionary of values of the output of
+        `CMD_HACK`
+
         base_url (str): the base url for the `LCA` interface
 
         protocol (str): specification of http or https protocols
 
-        port (str): the port where `LCA` is
-        being hosted on(riot version, normal version is 2999)
-
         username (str): As of patch 13.12 the username used
         in auth is a constant value("riot")
+
+        port (str): the port where `LCA` is
+        being hosted on(riot version, normal version is 2999)
 
         remoting_auth_token (str): Auth key
 
         connected (bool): connected to `LCA` status
+
+        listener (BackgroundThread): listener for `LCA`'s status
 
     Class Constants:
         LCA_NOT_CONNECTED_OUTPUT (str): Output when trying to hack but
@@ -35,6 +42,9 @@ class LeagueConnection:
 
         CMD_HACK (str): The cmd command to get LCA's info
 
+        LISTEN_TIMEOUT (str): The time in seconds on how long to wait before
+        each try of connection
+
     Data:
     Example request:
         GET https://127.0.0.1:2999/liveclientdata/allgamedata
@@ -42,25 +52,43 @@ class LeagueConnection:
         "No Instance(s) Available."
     """
 
+    cmd_output_dict: DefaultDict
     base_url: str
     protocol: str
-    port: str
     username: str
-    remoting_auth_token: str
+    # _port: str  # moved to @proprety
+    # _remoting_auth_token: str @ proprety
     connected: bool
+    listener: BackgroundThread
 
     # Class Constants
     LCA_NOT_CONNECTED_OUTPUT = "No Instance(s) Available"  # starts with
     LCA_CONNECTED_OUTPUT = "CommandLine"  # starts with
     CMD_HACK = "WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline"
+    LISTEN_TIMEOUT = 2
 
     def __init__(self) -> None:
+        self.cmd_output_dict: DefaultDict = defaultdict(lambda: "default")
+        self.base_url = "127.0.0.1"
         self.protocol = "https"
-        self.bt = BackgroundThread(fn_to_run=self.listen, time_between_runs=2)
-        self.bt.start()
-        print("continuing")
-        # asyncio.run(self.listen())
-        # task = asyncio.create_task(self.listen())
+        self.username = "riot"
+        self.connected = False
+
+        # Start LCA Listener
+        self.listener = BackgroundThread(
+            fn_to_run=self.listen, time_between_runs=self.LISTEN_TIMEOUT
+        )
+        self.listener.start()
+
+    @property
+    def port(self):
+        """The port where `LCA` is being hosted on"""
+        return self.cmd_output_dict["app-port"]
+
+    @property
+    def remoting_auth_token(self):
+        """Riot auth key"""
+        return self.cmd_output_dict["remoting-auth-token"]
 
     def listen(self) -> None:
         """Pseudo-Hook to listen to the status of `LCA`
@@ -68,12 +96,47 @@ class LeagueConnection:
         Function that runs every X seconds to get the status of `LCA`'s LeagueConnection
         """
         print("Listening to `LCA`...")
-        cmd_output = execute_cmd_command(self.CMD_HACK)
-        print(f"got {cmd_output}")
 
-    def build_url(self, o: object) -> str:
-        """."""
-        return ""
+        # Process Output
+        cmd_output = execute_cmd_command(self.CMD_HACK)
+        self.cmd_output_dict = self.parse_cmd_output(self.format_cmd_output(cmd_output))
+        self.connected = cmd_output.startswith(self.LCA_CONNECTED_OUTPUT)
+
+        print(f"CMD_OUTPUT_DICT: {self.cmd_output_dict}")
+        print(f"RAT: {self.remoting_auth_token}")
+
+    def format_cmd_output(self, output: str) -> str:
+        """Formats output from windows's cmd
+
+        Removes '\n' and excessive spaces from the output
+        of `CMD_HACK`
+        """
+        output = remove_excessive_spaces(output)
+        output = re.sub("\n", "", output)
+        return output
+
+    def parse_cmd_output(self, output: str) -> DefaultDict:
+        """Parses cmd output to a dictionary"""
+        variables: DefaultDict = DefaultDict(lambda: "default")
+        reg_expr = r'--([\w-]+)=([^"\s]+|"([^"]+))'
+
+        # RegEx find
+        matches = re.findall(reg_expr, output)
+
+        # Dictionary parse
+        for entry in matches:
+            key = entry[0]
+            values = entry[1]
+            variables[key] = values
+
+        return variables
+
+    def build_url(self, request: str) -> str:
+        """Build request url
+
+        Helper function that builds a complete url of a request
+        """
+        return f"{self.protocol}://{self.base_url}:{self.port}/{request}"
 
     def get(self, url) -> object:
         """."""

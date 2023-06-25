@@ -10,6 +10,7 @@ Features:
 """
 
 import subprocess
+import re
 
 
 def execute_cmd_command(command: str) -> str:
@@ -29,6 +30,14 @@ def execute_cmd_command(command: str) -> str:
         # Handle command execution error
         print(f"Command execution failed with error code {e.returncode}: {e.output}")
         return "Command execution failed."
+
+
+def remove_excessive_spaces(target: str) -> str:
+    """Removes excessive spaces from `target`
+
+    Warning: processes parameterized str
+    """
+    return re.sub(" +", " ", target)
 
 
 if __name__ == "__main__":
