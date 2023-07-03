@@ -24,6 +24,10 @@ WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline
 
 WHITHOUT CUSOTOM FONT JSON(USING ONE THAT CUSTOMTKINTER ALREADY PROVIDES)
 ```bash
+# Compile shaco using maturin
+...
+
+# Compile complete project with built shaco bin
 pyinstaller.exe -F main.py --collect-all customtkinter
 ```
 
