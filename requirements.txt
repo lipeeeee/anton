@@ -1,3 +1,4 @@
 keyboard
 customtkinter
 requests
+maturin
