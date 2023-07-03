@@ -10,10 +10,11 @@ A: Probably not, more refactoring todo
 from typing import Tuple
 from customtkinter import CTk, set_appearance_mode, set_default_color_theme
 
+
 class RootGui(CTk):
     """RootGui Class
-    
-    Custom Implementation of `customtkinter.CTk` to fit anton's requirements.   
+
+    Custom Implementation of `customtkinter.CTk` to fit anton's requirements.
     This will be the root that is passed through the creation of outside and inside
     league frames.
 
@@ -21,7 +22,7 @@ class RootGui(CTk):
         _geometry (str): the resolution of the window in a str format, eg: "100x100"
     """
 
-    _geometry: str 
+    _geometry: str
 
     # Functions from customtkinter
     _set_appearence_mode = set_appearance_mode
@@ -29,14 +30,14 @@ class RootGui(CTk):
 
     def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs) -> None:
         """Initializes `customtkinter` and `customtkinter.CTk` with anton's configuration
-        
+
         Configuration changes:
             `appearence_mode`: Color Scheme
             `default_color_theme`: Color Theme
         """
         # customtkinter initialization
-        set_appearance_mode('system')
-        set_default_color_theme('dark-blue')
+        set_appearance_mode("system")
+        set_default_color_theme("dark-blue")
 
         # customtikinter.CTk initialization
         super().__init__(fg_color, **kwargs)
@@ -54,12 +55,12 @@ class RootGui(CTk):
     def __repr__(self) -> str:
         return f"<RootGui {str(id(self))}>"
 
-    def set_geometry(self, geometry:str) -> None:                
+    def set_geometry(self, geometry: str) -> None:
         """Sets the Geometry of self(CTk)
-        
+
         Params:
             geometry (str): the resolution in a string format, eg: "100x200"
-        
+
         Raises:
             ValueError: if geometry is None or is not string
         """
