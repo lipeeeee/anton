@@ -15,7 +15,16 @@ Anton is a league of legends hack focused around QOL(Quality of life) improvemen
 ...
 
 
-# HACKING LEAGUE Client
+# GETTING LEAGUE PROCESS SHIT WITH WIN32
+```python
+# FIRST WE GET WINDOW HNDW (int)
+hndw = win32gui.FindWindow(None, "League of Legends")
+
+# THEN WE GET THREAD ID AND PROCESS IDEA
+(thread_id, process_id) = win32process.GetWindowThreadProcessId(hndw)
+```
+
+# HACKING LCA
 ```bash
 WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline
 ```

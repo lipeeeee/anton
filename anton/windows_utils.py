@@ -11,6 +11,7 @@ Features:
 
 import subprocess
 import re
+import win32gui
 
 
 def execute_cmd_command(command: str) -> str:
@@ -32,9 +33,13 @@ def execute_cmd_command(command: str) -> str:
         return "Command execution failed."
 
 
-def search_process_by_name() -> None:
-    """."""
-    ...
+def search_process_by_name(target: str) -> int:
+    """Searches process with windows32 api
+
+    Returns:
+        int: Process PID, 0 if cant find
+    """
+    return win32gui.FindWindow(None, target)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 #
 
 run:
-	poetry run python main.py
+	python main.py
 
 compile:
 	pyinstaller.exe -F main.py --collect-all customtkinter --icon=anton.ico -n 'anton'	
