@@ -1,4 +1,3 @@
 keyboard
 customtkinter
 requests
-pywin32
