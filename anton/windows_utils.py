@@ -11,7 +11,7 @@ Features:
 
 import subprocess
 import re
-import win32gui
+import win32gui, win32process
 
 
 def execute_cmd_command(command: str) -> str:
@@ -33,13 +33,22 @@ def execute_cmd_command(command: str) -> str:
         return "Command execution failed."
 
 
-def search_process_by_name(target: str) -> int:
-    """Searches process with windows32 api
+def search_hndw_by_name(target: str) -> int:
+    """Searches window hndw's with windows32 api
 
     Returns:
-        int: Process PID, 0 if cant find
+        int: Window HNDW, 0 if cant find
     """
     return win32gui.FindWindow(None, target)
+
+
+def get_thread_id_process_id(target_hndw: int) -> tuple[int, int]:
+    """Gets (thread_id, process_id) from `target_hndw`
+
+    Returns:
+        int, int: thread_id, process_id
+    """
+    return win32process.GetWindowThreadProcessId(target_hndw)
 
 
 if __name__ == "__main__":
