@@ -31,3 +31,9 @@ class Anton:
 
         if response is None or response.status_code != 204:
             print("SOMETHING WENT WRONG")
+
+    def start_league_offline(self) -> None:
+        """Starts League of Legends in an offline state
+
+        blabla
+        """

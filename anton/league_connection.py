@@ -5,10 +5,11 @@
 from collections import defaultdict
 import re
 import requests
+from typing import DefaultDict
 from requests.models import Response
 from .background_thread import BackgroundThread
-from .windows_utils import execute_cmd_command, remove_excessive_spaces
-from typing import DefaultDict
+from .windows_utils import execute_cmd_command
+from .format import remove_newline_chars, remove_excessive_spaces
 
 
 class LeagueConnection:
@@ -109,24 +110,12 @@ class LeagueConnection:
 
         # Process Output
         cmd_output = execute_cmd_command(self.CMD_HACK)
-        self.cmd_output_dict = self.parse_cmd_output(self.format_cmd_output(cmd_output))
+        cmd_output = remove_excessive_spaces(remove_newline_chars(cmd_output))
+        self.cmd_output_dict = self.parse_cmd_output(cmd_output)
         self.connected = cmd_output.startswith(self.LCA_CONNECTED_OUTPUT)
 
         print(f"CMD_OUTPUT_DICT: {self.cmd_output_dict}")
         print(f"RAT: {self.remoting_auth_token}")
-
-    def format_cmd_output(self, output: str) -> str:
-        """Formats output from windows's cmd
-
-        Removes '\n' and excessive spaces from the output
-        of `CMD_HACK`
-
-        WARNING:
-            The execution of this function can most likely be removed
-        """
-        output = remove_excessive_spaces(output)
-        output = re.sub("\n", "", output)
-        return output
 
     def parse_cmd_output(self, output: str) -> DefaultDict:
         """Parses cmd output to a dictionary"""

@@ -2,7 +2,7 @@
 #	ANTON MAKEFILE
 #
 
-build:
+run:
 	poetry run python main.py
 
 compile:
