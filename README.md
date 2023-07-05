@@ -3,7 +3,7 @@
 # anton
 	
 </div>
-Anton is a league of legends hack which implements a wide amount of QOL(Quality of life) improvements to the default lol/riot ecosystem.
+Anton is a league of legends hack which implements a wide amount of QOL(Quality of life) improvements to the default lol client/riot ecosystem.
 
 # Remove Challenges
 Remove challenges from league of legends profile.
