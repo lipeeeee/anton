@@ -12,12 +12,20 @@ Remove challenges from league of legends profile.
 
 Anton allows you to reset challenges from your profile as if you never equipped them in the first place.
 
-# League Client Hook
-...
-
 # Start as Offline
 ...
 
+# Change icon
+...
+
+# Change profile rank
+...
+
+# Change status
+...
+
+# League Client Hook
+...
 
 # GETTING LEAGUE PROCESS SHIT WITH WIN32
 ```python
