@@ -3,12 +3,16 @@
 # anton
 	
 </div>
-Anton is a league of legends hack focused around QOL(Quality of life) improvements.
-
-# League Client Hook
-...
+Anton is a league of legends hack which implements a wide amount of QOL(Quality of life) improvements to the default lol/riot ecosystem.
 
 # Remove Challenges
+Remove challenges from league of legends profile.
+
+***(insert mega interesting video)***
+
+Anton allows you to reset challenges from your profile as if you never equipped them in the first place.
+
+# League Client Hook
 ...
 
 # Start as Offline
@@ -20,7 +24,7 @@ Anton is a league of legends hack focused around QOL(Quality of life) improvemen
 # FIRST WE GET WINDOW HNDW (int)
 hndw = win32gui.FindWindow(None, "League of Legends")
 
-# THEN WE GET THREAD ID AND PROCESS IDEA
+# THEN WE GET THREAD ID AND PROCESS ID
 (thread_id, process_id) = win32process.GetWindowThreadProcessId(hndw)
 ```
 
